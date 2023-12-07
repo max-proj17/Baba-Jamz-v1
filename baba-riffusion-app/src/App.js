@@ -27,12 +27,13 @@ function App() {
       <header className="App-header">
         <h1>Generate Music with Riffusion</h1>
         <input
+          className="input-text"
           type="text"
           value={prompt}
           onChange={handlePromptChange}
           placeholder="Enter a prompt for music generation"
         />
-        <button onClick={handleGenerateMusic}>Generate Music</button>
+        <button className="button" onClick={handleGenerateMusic}>Generate Music</button>
         {music && (
           <div>
             {/* Handle music display here. If it's a URL to an audio file: */}
