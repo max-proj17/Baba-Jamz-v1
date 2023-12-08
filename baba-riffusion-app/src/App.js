@@ -13,10 +13,12 @@ function App() {
 
   const handleGenerateMusic = async () => {
     try {
-      
-      const response = await axios.post('/generate-music', { prompt });
-      // Assuming the API returns the music file's URL or data
-      setMusic(response.data);
+      const response = await axios.post('http://localhost:3001/generate-music', { prompt });
+      // Update state with the received audio and spectrogram URIs
+      setMusic({
+        audioUrl: response.data.audio,
+        spectrogramUrl: response.data.spectrogram
+      });
     } catch (error) {
       console.error('There was an error generating the music:', error);
     }
@@ -24,27 +26,31 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Generate Music with Riffusion</h1>
-        <input
-          className="input-text"
-          type="text"
-          value={prompt}
-          onChange={handlePromptChange}
-          placeholder="Enter a prompt for music generation"
-        />
-        <button className="button" onClick={handleGenerateMusic}>Generate Music</button>
-        {music && (
-          <div>
-            {/* Handle music display here. If it's a URL to an audio file: */}
-            <audio controls src={music.audioUrl}>
-              Your browser does not support the audio element.
-            </audio>
-            {/* If it's binary data, you might need to handle it differently */}
-          </div>
-        )}
-      </header>
-    </div>
+    <header className="App-header">
+      <h1>Generate Music with Riffusion</h1>
+      <input
+        className="input-text"
+        type="text"
+        value={prompt}
+        onChange={handlePromptChange}
+        placeholder="Enter a prompt for music generation"
+      />
+      <button
+        className="button"
+        onClick={handleGenerateMusic}
+      >
+        Generate Music
+      </button>
+      {music && (
+        <div>
+          <audio controls src={music.audioUrl}>
+            Your browser does not support the audio element.
+          </audio>
+          <img src={music.spectrogramUrl} alt="Spectrogram" />
+        </div>
+      )}
+    </header>
+  </div>
   );
 }
 
