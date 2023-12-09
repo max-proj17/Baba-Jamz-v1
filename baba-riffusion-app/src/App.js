@@ -6,6 +6,8 @@ import axios from 'axios';
 function App() {
   const [prompt, setPrompt] = useState('');
   const [music, setMusic] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handlePromptChange = (event) => {
     setPrompt(event.target.value);
@@ -20,6 +22,9 @@ function App() {
     } catch (error) {
       console.error('There was an error generating the music:', error);
     }
+    finally{
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -33,7 +38,10 @@ function App() {
           onChange={handlePromptChange}
           placeholder="Enter a prompt for music generation"
         />
-        <button className="button" onClick={handleGenerateMusic}>Generate Music</button>
+        <button className="button" onClick={handleGenerateMusic} disabled={isLoading}>
+        {isLoading ? 'Generating...' : 'Generate Music'}
+        </button>
+        {isLoading && <div>Loading...</div>} //can change to buffer graphic later
         {music && (
           <div>
             {/* Handle music display here. If it's a URL to an audio file: */}
