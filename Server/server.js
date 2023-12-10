@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const Replicate = require('replicate');
 const ffmpeg = require('fluent-ffmpeg');
+ffmpeg.setFfmpegPath("C:\\ffmpeg\\bin\\ffmpeg.exe");
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
