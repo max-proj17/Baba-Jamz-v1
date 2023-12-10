@@ -7,6 +7,8 @@
   height: 40vmin;
   pointer-events: none;
 } */
+
+
 /* Style for the text box */
 .input-text {
   border-radius: 4px;
@@ -28,6 +30,26 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.album-cover {
+  max-width: 300px; 
+  height: auto; 
+}
+
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prompt-container {
+  width: 45%; 
+}
+
+.media-container {
+  width: 45%; 
+}
+
 
 .button:hover {
   background-color: #1ed760; /* Lighter Green */

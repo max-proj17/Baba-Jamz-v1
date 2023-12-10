@@ -10,6 +10,9 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const onFinished = require('on-finished');
+const FormData = require('form-data');
+const OpenAI = require('openai');
+
 
 const app = express();
 app.use(cors());
@@ -18,8 +21,17 @@ app.use(bodyParser.json());
 // Serve files from the temp directory statically
 app.use('/temp', express.static(path.join(__dirname, 'temp')));
 
+// serve static files from 'public' directory
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+
 // This directory will need to exist and will be used to store the audio files temporarily
 const TEMP_DIR = path.join(__dirname, '/temp');
+
+//openAI configs
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY // This is also the default, can be omitted
+});
 
 // Check if the TEMP_DIR exists, if not create it
 if (!fs.existsSync(TEMP_DIR)) {
@@ -68,6 +80,63 @@ app.post('/generate-music', async (req, res) => {
         }
       }
     );
+
+//openAI call to generate prompt
+app.post('/generate-album-cover-prompt', async (req, res) => {
+  const { prompt } = req.body;
+
+  try {
+    const gptResponse = await openai.completions.create({
+      model: "text-davinci-003",
+      prompt: `Generate an album cover description based on this music theme: '${prompt}'`,
+      max_tokens: 100
+    });
+
+    // Updated response handling
+    // The v4 SDK uses 'choices' directly in the response object
+    const albumCoverPrompt = gptResponse.choices[0].text.trim();
+    res.json({ albumCoverPrompt });
+  } catch (error) {
+    console.error('Error with OpenAI GPT:', error.message);
+    res.status(500).send('Error generating album cover prompt');
+  }
+});
+
+
+//call to ClipDrop to generate album cover
+//this is only commented out because i dont want to use too many of my credits during testing XD
+app.post('/generate-album-cover', async (req, res) => {
+  const { albumCoverPrompt } = req.body;
+
+  try {
+    const form = new FormData();
+    form.append('prompt', albumCoverPrompt);
+
+    const clipDropResponse = await axios.post('https://clipdrop-api.co/text-to-image/v1', form, {
+      headers: {
+        'x-api-key': process.env.CLIPDROP_API_KEY,
+        ...form.getHeaders()
+      },
+      responseType: 'arraybuffer' // Ensure you get the response as binary data
+    });
+
+    // Save the binary data to a file
+    const imageBuffer = Buffer.from(clipDropResponse.data);
+    const imageName = `album-cover-${Date.now()}.png`;
+    const imagePath = path.join(__dirname, 'public', imageName); // Make sure you have a 'public' directory
+    fs.writeFileSync(imagePath, imageBuffer);
+
+    // Generate a URL to access the image
+    const albumCoverUrl = `http://localhost:${PORT}/public/${imageName}`;
+
+    console.log('Album Cover URL:', albumCoverUrl);
+    res.json({ albumCoverUrl });
+  } catch (error) {
+    console.error('Error generating album cover image with ClipDrop:', error.message);
+    res.status(500).send('Error generating album cover image');
+  }
+});
+
 
     // Download the audio file
     const audioResponse = await axios.get(output.audio, { responseType: 'arraybuffer' });
