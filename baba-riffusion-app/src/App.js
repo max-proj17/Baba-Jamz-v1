@@ -41,7 +41,7 @@ function App() {
         <button className="button" onClick={handleGenerateMusic} disabled={isLoading}>
         {isLoading ? 'Generating...' : 'Generate Music'}
         </button>
-        {isLoading && <div>Loading...</div>} //can change to buffer graphic later
+        {isLoading && <div>Loading...</div>} 
         {music && (
           <div>
             {/* Handle music display here. If it's a URL to an audio file: */}
