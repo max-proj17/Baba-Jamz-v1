@@ -19,6 +19,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "fs": "^0.0.1-security",
     "on-finished": "^2.4.1",
+    "openai": "^4.20.1",
     "path": "^0.12.7",
     "replicate": "^0.23.0"
   }

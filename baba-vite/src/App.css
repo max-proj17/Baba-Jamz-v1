@@ -1,0 +1,109 @@
+.App {
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  height: 100vh; /* Full viewport height */
+  padding: 20px; /* Padding around the app */
+}
+
+
+/* .App-logo {
+  height: 40vmin;
+  pointer-events: none;
+} */
+
+
+/* Style for the text box */
+.input-text {
+  border-radius: 4px;
+  border: none;
+  padding: 10px 15px;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+/* Style for buttons */
+.button {
+  background-color: #1db954; /* Spotify Green */
+  border: none;
+  border-radius: 500px;
+  color: white;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.album-cover {
+  max-width: 300px; 
+  height: auto; 
+}
+
+/* Style for the Three.js canvas container */
+.three-container {
+  width: 300px; /* Set the width of the Three.js canvas */
+  height: 300px; /* Set the height of the Three.js canvas */
+  color: #282c34;
+  /*margin-right: 20px;
+  /*#282c34; /* Set background color*/
+}
+.content-container {
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: start; /* Align items to the start */
+  width: 100%; /* Take up full width */
+}
+/* Container specifically for the music generation controls */
+.music-generation-container {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center content vertically */
+  padding-left: 20px; /* Space between the Three.js scene and the content */
+}
+.prompt-container {
+  margin-bottom: 20px; /* Space between the prompt input and the button */
+}
+
+.media-container {
+  /* Same max-width as prompt-container for consistency */
+  max-width: 600px;
+  width: 100%;
+}
+
+
+.button:hover {
+  background-color: #1ed760; /* Lighter Green */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #1db954;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
