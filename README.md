@@ -4,7 +4,7 @@ Welcome to Baba Jamz v1, an innovative music generation and visualization projec
 
 ## Overview
 
-Baba Jamz v1 is a web-based application that allows users to generate music based on AI models alongside an AI generated dancing 3D model of Baba in a dynamic environment! The project is divided into two main parts: the server-side for API processing and the client-side for Three.js, music, and song cover vizualization.
+Baba Jamz v1 is a web-based application that allows users to generate music based on AI models alongside an AI generated dancing 3D model of Baba (made with Luma AI) in a dynamic environment! The project is divided into two main parts: the server-side for API processing and the client-side for Three.js, music, and song cover vizualization.
 
 ## Software Stack
 
@@ -29,7 +29,7 @@ Baba Jamz v1 is a web-based application that allows users to generate music base
 ## Features
 - **Music Generation**: Users can input prompts to generate music using Riffusions AI models.
 - **Dynamic Visualization**: The generated music is visualized in a 3D environment using Three.js.
-- **Album Cover Generation**: AI-generated prompts are used to create unique album covers.
+- **Album Cover Generation**: Your input prompts, piplined through a ChatGPT prompt tweaker, are used to create unique album covers.
 
 ## Installation and Setup
 
