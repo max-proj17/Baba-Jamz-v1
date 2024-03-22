@@ -11,7 +11,7 @@ Baba Jamz v1 is a web-based application that allows users to generate music base
 ### Server-Side
 - **Node.js**: The backend is built on Node.js, providing a robust environment for server-side scripting.
 - **Express**: This minimal and flexible Node.js web application framework is used to build the server.
-- **OpenAI & Replicate**: These AI platforms are integrated for generating music and related content.
+- **OpenAI & Riffusion**: These AI platforms are integrated for generating music and related content.
 - **FFmpeg**: A complete, cross-platform solution to record, convert and stream audio and video.
 - **Other Dependencies**: `body-parser`, `cors`, `dotenv`, `axios`, and more for handling various server functionalities.
 
